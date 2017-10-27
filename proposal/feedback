@@ -1,0 +1,11 @@
+fine as long as we have to do some classification and pre/pro processing.
+read entire number not just single digit. (important)
+process of learning the network, and steps needed to set up.
+probability map, how to process it.
+how network will work with perspective distortions
+clasify perspective distorted data with normal data.
+how big can the number be? (build an image parameter) 
+
+work in parallel (it has to be specified in the proposal, as detailed as possible)
+example images of what is input and what is output
+
