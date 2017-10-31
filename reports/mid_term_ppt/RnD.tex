@@ -4,7 +4,6 @@
 \mode<presentation>
 \input{config}
 \usepackage{bibentry}
-
 %\usepackage[square,numbers]{natbib}
 \definecolor{brsu_blue}{HTML}{0BA1E2}
 \usepackage{url}
@@ -34,26 +33,34 @@
 \end{frame}
 
 
-
+\section{Motivation}
 \begin{frame}
-
-\frametitle{ Motivation}
-
-\begin{itemize}
-	
-\item 
-
-
-\end{itemize}
-
-
+	\frametitle{ Motivation}
+	\begin{itemize}
+		\item This is a optical character recognition (OCR) problem.
+		\item Digit recognition is used in various applications such as postal mail
+		sorting, bank check processing, form data entry, etc.
+		\item Digit recognition is an important component of modern-day map making. \cite{Goodfellow2013}
+		\item It is a challenging problem due to:  \cite{Goodfellow2013}
+		
+	\end{itemize}
 \end{frame}
-
+\section{Challenges}
+\begin{frame}
+	\frametitle{Challenges}
+	\begin{itemize}
+		\item Wide variability of visual appearance of text: fonts, colors, and orientations.
+						\item Different environmental factors: lightning, shadows, and occlusions.
+						\item Image acquisition factors: motion, blurring, and resolution. 
+	
+	\end{itemize}
+\end{frame}
 \begin{frame}
 \frametitle{Problem Description}
 \begin{itemize}
+	\item The project is about reading digits from the natural images with the
+	help of convolutional neural networks(CNN).
 	\item 
-	
 \end{itemize}
 
 \end{frame}
@@ -89,24 +96,27 @@
 
 
 
+\bibliographystyle{unsrt}
+\nocite*
+\bibliography{presentation.bib}
 
-\begin{thebibliography}{9}
-\bibitem{MdArfat}
-Md Arafat Sultan, Cristobal Salazar and Tamara Sumner, "Fast and Easy Short Answer Grading with High Accuracy", Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, San Diego California, USA, June 12-17, 2016
-\bibitem{Sultan_wordAligner}"Md Arafat Sultan
-	, Steven Bethard and Tamara Sumner", "Back to Basics for Monolingual Alignment: Exploiting Word Similarity and
-	Contextual Evidence",  TACL, 2014
-
-\bibitem{Nlp}
-Speech and Language Processing by Daniel Jurafsky and James H. Martin
-\bibitem{lemmaAndStemma}
- https://queryunderstanding.com/stemming-and-lemmatization-6c086742fe45
-
-\bibitem{n-gram}
- http://www.dictionary.com/browse/n-gram
-
-
-\end{thebibliography}
+%\begin{thebibliography}{9}
+%\bibitem{MdArfat}
+%Md Arafat Sultan, Cristobal Salazar and Tamara Sumner, "Fast and Easy Short Answer Grading with High Accuracy", Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, San Diego California, USA, June 12-17, 2016
+%\bibitem{Sultan_wordAligner}"Md Arafat Sultan
+%	, Steven Bethard and Tamara Sumner", "Back to Basics for Monolingual Alignment: Exploiting Word Similarity and
+%	Contextual Evidence",  TACL, 2014
+%
+%\bibitem{Nlp}
+%Speech and Language Processing by Daniel Jurafsky and James H. Martin
+%\bibitem{lemmaAndStemma}
+% https://queryunderstanding.com/stemming-and-lemmatization-6c086742fe45
+%
+%\bibitem{n-gram}
+% http://www.dictionary.com/browse/n-gram
+%
+%
+%\end{thebibliography}
 
 
 \end{document}

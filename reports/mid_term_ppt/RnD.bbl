@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{SVHN}
+The Street View House Numbers~(SVHN) Dataset.
+\newblock \url{http://ufldl.stanford.edu/housenumbers}.
+\newblock "[Online; accessed 07-10-2017]".
+
+\bibitem{netzer2011reading}
+Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo~Wu, and Andrew~Y
+  Ng.
+\newblock Reading digits in natural images with unsupervised feature learning.
+\newblock In {\em NIPS workshop on deep learning and unsupervised feature
+  learning}, volume 2011, page~5, 2011.
+
+\bibitem{Goodfellow2013}
+Ian~J Goodfellow, Yaroslav Bulatov, Julian Ibarz, Sacha Arnoud, and Vinay Shet.
+\newblock {Multi-digit Number Recognition from Street View Imagery using Deep
+  Convolutional Neural Networks}.
+\newblock {\em CoRR}, abs/1312.6:1--13, 2013.
+
+\end{thebibliography}

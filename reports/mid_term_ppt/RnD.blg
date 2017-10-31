@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: RnD.aux
+The style file: unsrt.bst
+Database file #1: presentation.bib.bib
+Warning--can't use both volume and number fields in netzer2011reading
+You've used 3 entries,
+            1791 wiz_defined-function locations,
+            464 strings with 4137 characters,
+and the built_in function-call counts, 678 in all, are:
+= -- 48
+> -- 41
+< -- 2
++ -- 15
+- -- 12
+* -- 46
+:= -- 115
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 2
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 29
+empty$ -- 66
+format.name$ -- 12
+if$ -- 147
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 2
+newline$ -- 18
+num.names$ -- 3
+pop$ -- 13
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 13
+stack$ -- 0
+substring$ -- 18
+swap$ -- 9
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 6
+width$ -- 4
+write$ -- 34
+(There was 1 warning)
