@@ -1,30 +1,31 @@
 \documentclass[12pt, letterpaper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
  
 \title{Read Digits in Natural Scene Images using Convolutional Neural Networks }
-\author{Ramesh Kumar(kumar.kumar@smail.inf.h-brs.de) \\ Roberto Cai Wu(roberto.cai@smail.inf.h-brs.de)}
+\author{Ramesh Kumar(Matr. Nr. 9029726) \\ Roberto Cai Wu(Matri. Nr. 9029544 )}
 \date{\today}
 \begin{document}
 \begin{titlepage}
 \maketitle
 \end{titlepage}
 
-\section{Project Description}
-
+\section{Motivation}
+\textbf{How this project related to Computed Vision?}
 	\begin{itemize}
-		\item The project is about reading digits from the natural images with the help
-		of convolutional neural networks(CNN).
-			\item As Digit recognition is used in various applications such as postal mail sorting, bank check processing, form data entry, etcetera. 
-\end{itemize}
+		\item Since computer vision is about interpreting the images from the camera such as image processing, classifying images based on features, etcetera.
+		\item In this project, we also use computer vision methods for pre-processing and post-processing such as image size reduction, image conversion, and many more,  other than convolutional neural network. 
+				\item Digit recognition is a computer vision problem used in applications such as postal mail sorting, bank check processing, form data entry, etcetera. 
+	\end{itemize}
 
 
 
-%\textbf{Why Convolutional Neural Network}
-%	\begin{itemize}
-%		\item Since fast processing, accuracy and speed for these applications is important therefore, convolutional neural network is useful in this case.
-		%\item Furthermore, according to state-of-the-art, it shows better performance as compare to other approaches\cite{Convolutional Neural Networks Applied to House Numbers Digit Classification}
-	%\end{itemize}
+\textbf{Why Convolutional Neural Network}
+	\begin{itemize}
+		\item Since fast processing, accuracy and speed for these applications is important therefore, convolutional neural network is useful in this case.
+		\item Furthermore, according to state-of-the-art, it shows better performance as compare to other approaches\cite{Convolutional Neural Networks Applied to House Numbers Digit Classification}
+	\end{itemize}
+ %therefore in our case,  pre-processing of images from the dataset can be done by using openCV library such as image size reduction, image cropping, etcetera, before feeding it to the convolutional neural network. We use convolutional network because  Furthermore, post-processing if needed can also be done by computer vision techniques. Lastly, for real time, camera feed and conversion of live images into gray scale 
+
 %% Approach
 
 \section{Approach}
@@ -40,16 +41,16 @@ Images from dataset will be preprocessed before feeding to the network. Later on
 		\end{itemize}
 	\item Convolutional Neural Networks are used to extract features
 	from the images and classify them. These networks are consists of different layers such as convolutional layers, pooling layers, and fully connected layers. Convolutional layer is first layer of the network that takes input as image and fully connected layer is final layer/output layer of the network that provides possible outcome based on input image.
-	 %\item  \textbf{Challenges}
-	%	\begin{itemize}
-	%		\item Different Lighting conditions
-	%		\item Design an appropriate network
-	%		\item Different perspective view
-	%		\item Blurred digits 
-	%		\item Can be more when we start implementation
+	\item  \textbf{Challenges}
+		\begin{itemize}
+			\item Different Lighting conditions
+			\item Design an appropriate network
+			\item Different perspective view
+			\item Blurred digits 
+			\item Can be more when we start implementation
 			
-	%	\end{itemize}
-	%\item For testing, we will test the images from live camera under various possible conditions such as hand-written digits, computerized-written digits, different lighting conditions, different font sizes, etcetera.
+		\end{itemize}
+	\item For testing, we will test the images from live camera under various possible conditions such as hand-written digits, computerized-written digits, different lighting conditions, different font sizes, etcetera.
 	\item Possible outcomes will be within 10 digit classes; one for each digit from label ``0'' to ``9'' and probability score of each outcome.
 \end{itemize}
 
@@ -62,22 +63,9 @@ Images from dataset will be preprocessed before feeding to the network. Later on
 	\item Post-processing (Roberto Cai)
 	\item Probability Score (Ramesh Kumar)
 	\item Individual number combination in final result (Roberto Cai)
-	\item Evaluation of approach (Ramesh Kumar)
 	\item Documentation(pair)
 \end{itemize}
 
-\section{Sample images}
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{dataset.png}
-\caption{Dataset sample }
-\end{figure}
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{example.png}
-\caption{Expected result}
-\end{figure}
-\newpage
 \begin{thebibliography}{9}
 \bibitem{Convolutional Neural Networks Applied to House Numbers Digit Classification}
 Pierre Sermanet, Soumith Chintala and Yann LeCun, "Convolutional Neural Networks Applied to
@@ -94,7 +82,6 @@ Yuval Netzer
 , Andrew Y. Ng, "Reading Digits in Natural Images
 with Unsupervised Feature Learning", In NIPS Workshop on Deep
 Learning and Unsupervised Feature Learning, 2011.
-
 \end{thebibliography} 
 
 \end{document}
