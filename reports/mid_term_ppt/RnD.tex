@@ -8,6 +8,8 @@
 %\usepackage[square,numbers]{natbib}
 \definecolor{brsu_blue}{HTML}{0BA1E2}
 \usepackage{url}
+\usepackage[font=small]{caption} 
+\usepackage[font=footnotesize]{subcaption}
 \setbeamercolor{title separator}{fg=brsu_blue}
 \setbeamercolor{progress bar}{fg=brsu_blue}
 \setbeamercolor{normal text}{fg=black,bg=white}
@@ -48,7 +50,6 @@
 		sorting, bank check processing, form data entry, etc
 		\item Digit recognition is an important component of modern-day map making \cite{Goodfellow2013}
 		%\item It is a challenging problem due to:  \cite{Goodfellow2013}
-		
 	\end{itemize}
 \end{frame}
 
@@ -56,7 +57,8 @@
 \begin{frame}
 \frametitle{Problem Description}
 \begin{itemize}
-	\item To read digits from natural images 
+	\item The task is to read digits from natural images
+	\item We use the Street View House Numbers dataset \cite{SVHN}, which consists of real-word images taken from house numbers
 	\item We use convolutional neural networks(CNN) for fast processing, accuracy and speed
 \end{itemize}
 
@@ -123,8 +125,27 @@
 
 \begin{figure}[!h]
 \includegraphics[width=\textwidth]{19.png}
-\caption{Example }
+\caption{Reading labeled data and generating bounding box}
 
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pre-processing}
+
+\begin{figure}[!h]
+\begin{subfigure}{0.3\textwidth}
+\includegraphics*[width=0.9 \textwidth]{19_c.png}
+\caption{Cropped image}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics*[width=0.9 \textwidth]{19_g.png}
+\caption{Gray scale}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics*[width=0.9 \textwidth]{19_b.png}
+\caption{Gaussian blur}
+\end{subfigure}
 \end{figure}
 \end{frame}
 
