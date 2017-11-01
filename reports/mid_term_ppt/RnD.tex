@@ -1,9 +1,10 @@
 % !TeX spellcheck = en_US
 % !TeX encoding = UTF-8
-\documentclass[10.5pt,aspectratio=1610,xcolor={usenames,dvipsnames,table}]{beamer}
+\documentclass[11.5pt,aspectratio=1610,xcolor={usenames,dvipsnames,table}]{beamer}
 \mode<presentation>
 \input{config}
 \usepackage{bibentry}
+\usepackage[justification=centering]{caption}
 %\usepackage[square,numbers]{natbib}
 \definecolor{brsu_blue}{HTML}{0BA1E2}
 \usepackage{url}
@@ -26,6 +27,11 @@
 
 \setbeamerfont{footnote}{size=\tiny}
 
+
+
+
+
+
 \begin{document}
 
 \begin{frame}
@@ -37,64 +43,133 @@
 \begin{frame}
 	\frametitle{ Motivation}
 	\begin{itemize}
-		\item This is a optical character recognition (OCR) problem.
+		\item This is a optical character recognition (OCR) problem
 		\item Digit recognition is used in various applications such as postal mail
-		sorting, bank check processing, form data entry, etc.
-		\item Digit recognition is an important component of modern-day map making. \cite{Goodfellow2013}
-		\item It is a challenging problem due to:  \cite{Goodfellow2013}
+		sorting, bank check processing, form data entry, etc
+		\item Digit recognition is an important component of modern-day map making \cite{Goodfellow2013}
+		%\item It is a challenging problem due to:  \cite{Goodfellow2013}
 		
 	\end{itemize}
 \end{frame}
-\section{Challenges}
-\begin{frame}
-	\frametitle{Challenges}
-	\begin{itemize}
-		\item Wide variability of visual appearance of text: fonts, colors, and orientations.
-						\item Different environmental factors: lightning, shadows, and occlusions.
-						\item Image acquisition factors: motion, blurring, and resolution. 
-	
-	\end{itemize}
-\end{frame}
+
+\section{Problem Description}
 \begin{frame}
 \frametitle{Problem Description}
 \begin{itemize}
-	\item The project is about reading digits from the natural images with the
-	help of convolutional neural networks(CNN).
-	\item 
+	\item To read digits from natural images 
+	\item We use convolutional neural networks(CNN) for fast processing, accuracy and speed
 \end{itemize}
 
 \end{frame}
 
+
+\section{Challenges}
+\begin{frame}
+\frametitle{Challenges}
+\begin{itemize}
+	\item Wide variability of visual appearance of text: fonts, colors, and orientations \cite{Goodfellow2013}
+	\item Different environmental factors: lightning, shadows, and occlusions \cite{Goodfellow2013}
+	\item Image acquisition factors: motion, blurring, and resolution \cite{Goodfellow2013}
+	%\item May be more too
+\end{itemize}
+\end{frame}
 
 %% 2nd paper %%
 
+%\begin{frame}
+
+%\frametitle{Assumptions and Pre-requistes
+%}
+%\begin{itemize}
+%	\item 
+%\end{itemize}
+%\end{frame}
+
+\section{Methodology}
 \begin{frame}
 
-\frametitle{Assumptions and Pre-requistes
-}
-\begin{itemize}
-	\item 
-\end{itemize}
-\end{frame}
-
-%% may be data setup
-\begin{frame}
 \frametitle{Methodology}
+%\myheading{\textbf{Block Diagram}}
 
 \begin{itemize}
-	\item 
+	\item Load and Interpret DataSet(done)
+	\item Pre-processing(started)
+	\item Convolutional Neural Network(started reading)
+	\item Post-processing(yet to start)
 \end{itemize}
+\begin{figure}[!h]
+	\includegraphics[width=\textwidth ]{block_diagram.png}
+	\caption{Block Diagram of System}
+\end{figure}
+
 \end{frame}
 
+%% 
 
 \begin{frame}
-\frametitle{Environment setup?}
+
+\frametitle{DataSet}
+
+\begin{figure}[!h]
+	\includegraphics[width=\textwidth, height = 5cm]{dataset.png}
+	\caption{Street View House Numbers Data set \cite{SVHN}}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Pre-processing}
+
+\begin{figure}[!h]
+\includegraphics[width=\textwidth]{19.png}
+\caption{Example }
+
+\end{figure}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Convolutional Neural Network(CNN)}
+
 \begin{itemize}
-	\item  
+	\item State-of-the-art shows CNN performs better as compare to other approaches\cite{cnn}
+	\item Extracts features from the images and classify them
+	\item Three type of Layers
+		\begin{itemize}
+			\item Convolutional: Extract low-level and high-level features
+			\item Pooling: Reduce amount of parameters and computations
+			\item Fully Connected: Neurons are fully connected
+		\end{itemize}	
+	\begin{figure}[!h]
+		\includegraphics[width=\textwidth]{cnn.png}
+		\caption{Basic Architecture of CNN }
+		
+	\end{figure}
+
 \end{itemize}
 \end{frame}
 
+%% post processing
 
+\begin{frame}
+\frametitle{Post-processing}
+
+\begin{itemize}
+	\item Combine digits and show complete output
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Testing \& Evaluation}
+
+\begin{itemize}
+	\item Consider maximum digits in image are 5
+	\item Test the images of digits from live camera under different conditions
+	\item Use validation set from dataset to compute accuracy of model
+\end{itemize}
+\end{frame}
 
 \bibliographystyle{unsrt}
 \nocite*
