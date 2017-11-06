@@ -3,4 +3,5 @@
 \beamer@sectionintoc {1}{Motivation}{2}{0}{1}
 \beamer@sectionintoc {2}{Problem Description}{3}{0}{2}
 \beamer@sectionintoc {3}{Challenges}{4}{0}{3}
-\beamer@sectionintoc {4}{Methodology}{5}{0}{4}
+\beamer@sectionintoc {4}{Assumptions}{5}{0}{4}
+\beamer@sectionintoc {5}{Methodology}{6}{0}{5}
