@@ -28,20 +28,30 @@
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\slideentry {5}{0}{7}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {5}{0}{8}{8/8}{}{0}}
+\headcommand {\sectionentry {6}{Dataset}{8}{Dataset}{0}}
+\headcommand {\beamer@sectionpages {6}{7}}
+\headcommand {\beamer@subsectionpages {6}{7}}
+\headcommand {\slideentry {6}{0}{8}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {5}{0}{9}{9/9}{}{0}}
+\headcommand {\slideentry {6}{0}{9}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {5}{0}{10}{10/10}{}{0}}
+\headcommand {\slideentry {6}{0}{10}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {5}{0}{11}{11/11}{}{0}}
+\headcommand {\sectionentry {7}{Pre-processing from camera}{11}{Pre-processing from camera}{0}}
+\headcommand {\beamer@sectionpages {6}{10}}
+\headcommand {\beamer@subsectionpages {6}{10}}
+\headcommand {\slideentry {7}{0}{11}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\slideentry {5}{0}{12}{12/12}{}{0}}
+\headcommand {\slideentry {7}{0}{12}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {5}{0}{13}{13/13}{}{0}}
+\headcommand {\slideentry {7}{0}{13}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@partpages {1}{15}}
-\headcommand {\beamer@subsectionpages {6}{15}}
-\headcommand {\beamer@sectionpages {6}{15}}
-\headcommand {\beamer@documentpages {15}}
-\headcommand {\def \inserttotalframenumber {13}}
+\headcommand {\slideentry {7}{0}{14}{14/14}{}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {7}{0}{15}{15/15}{}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\beamer@partpages {1}{17}}
+\headcommand {\beamer@subsectionpages {11}{17}}
+\headcommand {\beamer@sectionpages {11}{17}}
+\headcommand {\beamer@documentpages {17}}
+\headcommand {\def \inserttotalframenumber {15}}

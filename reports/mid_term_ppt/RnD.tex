@@ -134,11 +134,11 @@
 
 
 \begin{frame}
-
+\section{Dataset}
 \frametitle{DataSet}
 
 \begin{figure}[!h]
-	\includegraphics[width=\textwidth, height = 5cm]{images/dataset.png}
+	\includegraphics[height = 6cm]{images/dataset.png}
 	\caption{Example images from SVHN dataset \cite{SVHN}}
 \end{figure}
 
@@ -146,26 +146,27 @@
 
 \begin{frame}
 
-\frametitle{Pre-processing}
+\frametitle{Pre-processing dataset}
 
 \begin{figure}[!h]
-\includegraphics[width=\textwidth]{images/19.png}
+\includegraphics[width=0.9\textwidth]{images/19.png}
 \caption{Reading labeled data and generating bounding box}
 
 \end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{Pre-processing}
+\frametitle{Pre-processing dataset}
 
-\begin{figure}[!h]
-\begin{subfigure}{0.25\textwidth}
-\includegraphics[width=0.25 \textwidth]{images/cropped_1.png}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.35\textwidth}
+\includegraphics[height=0.45 \textheight,width=0.25 \textwidth]{images/cropped_1.png}
 
 \caption{Cropped and converted to gray scale}
 \end{subfigure}
-\begin{subfigure}{0.28\textwidth}
-\includegraphics[width=0.25 \textwidth]{images/cropped_9.png}
+\begin{subfigure}{0.35\textwidth}
+\includegraphics[height=0.45 \textheight, width=0.25 \textwidth]{images/cropped_9.png}
 \caption{Cropped and converted to gray scale}
 \end{subfigure}
 
@@ -177,6 +178,44 @@
 \end{figure}
 \end{frame}
 
+\section{Pre-processing from camera}
+\begin{frame}
+\frametitle{Pre-processing from camera}
+
+\begin{itemize}
+	\item Resize image to 640x480 pixels
+	\item Convert to gray scale
+	\item Apply Gaussian filter
+	\item Use a binary thresholding
+	\item Find contours
+	\item Draw bounding box around contours
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pre-processing from camera(2)}
+	\begin{figure}[H]
+	\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=1 \textwidth]{images/threshold.jpg}
+	\caption{Original image}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=1 \textwidth]{images/Contour1.png}
+	\caption{Applying threshold and contours}
+	\end{subfigure}
+	
+	\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Pre-processing from camera (3)}
+	\begin{figure}[H]
+	\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=1 \textwidth]{images/bbox.png}
+	\caption{Bounding box over contours}
+	\end{subfigure}
+	
+	\end{figure}
+\end{frame}
 \begin{frame}
 
 \frametitle{Convolutional Neural Network(CNN)}
@@ -201,22 +240,22 @@
 
 %% post processing
 
-\begin{frame}
-\frametitle{Post-processing}
-
-\begin{itemize}
-	\item After classification, we use adaptive 
-\end{itemize}
-
-\end{frame}
+%\begin{frame}
+%\frametitle{Post-processing}
+%
+%\begin{itemize}
+%	\item After classification, we use adaptive 
+%\end{itemize}
+%
+%\end{frame}
 
 \begin{frame}
 \frametitle{Testing \& Evaluation}
 
 \begin{itemize}
-	\item Consider maximum digits in image are 5
-	\item Test the images of digits from live camera under different conditions
-	\item Use validation set from dataset to compute accuracy of model
+	\item Print numbers in a sheet of paper (different size, font, color,  and orientation)
+	\item Test the images of digits from live camera under different conditions (light and perspective)
+	\item Use test set to compute accuracy of model
 \end{itemize}
 \end{frame}
 
