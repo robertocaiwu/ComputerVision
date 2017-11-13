@@ -72,6 +72,7 @@
 	\item Wide variability of visual appearance of text: fonts, colors, and orientations \cite{Goodfellow2013}
 	\item Different environmental factors: lightning, shadows, and occlusions \cite{Goodfellow2013}
 	\item Image acquisition factors: motion, blurring, and resolution \cite{Goodfellow2013}
+	%\item To detect hand-written as well as electronic digits
 	%\item May be more too
 \end{itemize}
 \end{frame}
@@ -80,10 +81,10 @@
 \begin{frame}
 \frametitle{Assumptions}
 \begin{itemize}
-	\item Images used for training and testing contain only house numbers
-	\item The image will not contain numbers longer than 5 digits
-	\item Numbers are not occluded even if images include other objects (trees, signs, etc.)
-	\item Numbers are not hand-written
+	\item Images do not contain any characters, other than digits
+	\item Background color will not change and it contain digits of different colors and intensities 
+	%\item We may be able to detect digits with blurred images as data set contains blurred images
+
 \end{itemize}
 \end{frame}
 %% 2nd paper %%
@@ -111,7 +112,7 @@
 	\item Testing and evaluation
 \end{itemize}
 \begin{figure}[!h]
-	\includegraphics[width=\textwidth ]{methodology.png}
+	\includegraphics[width=\textwidth ]{images/methodology.png}
 	\caption{Block Diagram of System}
 \end{figure}
 
@@ -137,7 +138,7 @@
 \frametitle{DataSet}
 
 \begin{figure}[!h]
-	\includegraphics[width=\textwidth, height = 5cm]{dataset.png}
+	\includegraphics[width=\textwidth, height = 5cm]{images/dataset.png}
 	\caption{Example images from SVHN dataset \cite{SVHN}}
 \end{figure}
 
@@ -148,7 +149,7 @@
 \frametitle{Pre-processing}
 
 \begin{figure}[!h]
-\includegraphics[width=\textwidth]{19.png}
+\includegraphics[width=\textwidth]{images/19.png}
 \caption{Reading labeled data and generating bounding box}
 
 \end{figure}
@@ -158,18 +159,21 @@
 \frametitle{Pre-processing}
 
 \begin{figure}[!h]
-\begin{subfigure}{0.3\textwidth}
-\includegraphics*[width=0.9 \textwidth]{19_c.png}
-\caption{Cropped image}
+\begin{subfigure}{0.25\textwidth}
+\includegraphics[width=0.25 \textwidth]{images/cropped_1.png}
+
+\caption{Cropped and converted to gray scale}
 \end{subfigure}
-\begin{subfigure}{0.3\textwidth}
-\includegraphics*[width=0.9 \textwidth]{19_g.png}
-\caption{Gray scale}
+\begin{subfigure}{0.28\textwidth}
+\includegraphics[width=0.25 \textwidth]{images/cropped_9.png}
+\caption{Cropped and converted to gray scale}
 \end{subfigure}
-\begin{subfigure}{0.3\textwidth}
-\includegraphics*[width=0.9 \textwidth]{19_b.png}
-\caption{Gaussian blur}
-\end{subfigure}
+
+%\begin{subfigure}{0.3\textwidth}
+%\includegraphics*[width=0.9 \textwidth]{images/19_b.png}
+%\caption{Gaussian blur}
+%\end{subfigure}
+
 \end{figure}
 \end{frame}
 
@@ -187,7 +191,7 @@
 			\item Fully Connected: Neurons are fully connected
 		\end{itemize}	
 	\begin{figure}[!h]
-		\includegraphics[width=\textwidth]{cnn.png}
+		\includegraphics[width=\textwidth]{images/cnn.png}
 		\caption{Basic Architecture of CNN }
 		
 	\end{figure}
@@ -201,7 +205,7 @@
 \frametitle{Post-processing}
 
 \begin{itemize}
-	\item Combine digits and show complete output
+	\item After classification, we use adaptive 
 \end{itemize}
 
 \end{frame}
