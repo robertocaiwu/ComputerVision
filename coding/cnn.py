@@ -1,10 +1,11 @@
 from __future__ import absolute_import
 from __future__ import division
-from __future__ import print_function
+#from __future__ import print_function
 
 # Imports
 import numpy as np
 import pickle
+import keras
 from keras.models import Sequential
 from keras.layers import *
 from keras.layers.advanced_activations import PReLU
@@ -17,12 +18,14 @@ import matplotlib.pyplot as plt
 
 
 #  CNN structure
-def cnn(input_shape, num_classes):
+def CNN(input_, num_classes):
+    #print input_shape
     model = Sequential()
-    model.add(Conv2D(32, kernel_size=(5, 5), strides=(1, 1),
+    model.add(Conv2D(16, kernel_size=(5, 5),
                      activation='relu',
-                     input_shape=input_shape))
-    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+                     input_shape=input_))
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2)))
+    model.add(Dropout(0.5))
     model.add(Conv2D(64, (5, 5), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Flatten())
@@ -82,26 +85,31 @@ if __name__ == "__main__":
     num_classes = 10
 
     image_size =32, 32, 1
-    print image_size
+    print(image_size)
 
     batch_size = 150
-    num_epochs = 50
+    num_epochs = 100
+    #print "traind ata ", train_dataset
+    train = gen(train_dataset, train_labels, batch_size)
 
-    train_x, train_y = (gen(train_dataset, train_labels, batch_size))
-    print "training generator being called"
+    #train_x, train_y = (gen(train_dataset, train_labels, batch_size))
+    print("training generator being called")
 
-    # valid_x, valid_y = (gen(valid_dataset, valid_labels, batch_size))
-    test_x, test_y = (gen(test_dataset, test_labels, batch_size))
-    print "training generator being called"
+    valid = gen(valid_dataset, valid_labels, batch_size)
+    #test_x, test_y = (gen(test_dataset, test_labels, batch_size))
+    #test = (gen(test_dataset, test_labels, batch_size))
+    
 
-    print "network being called"
+    print("training generator being called")
+
+    print("network being called")
     model = CNN(image_size, num_classes)
 
     model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.SGD(lr=0.01),
               metrics=['accuracy'])
 
-    print model.summary()
+    print(model.summary())
     csv_logger = CSVLogger('training.log')
     early_stop = EarlyStopping('val_acc', patience=200, verbose=1)
     model_checkpoint = ModelCheckpoint(model_save_path,
@@ -110,17 +118,19 @@ if __name__ == "__main__":
 
     model_callbacks = [early_stop, model_checkpoint, csv_logger]
     # print "len(train_dataset) ", len(train_dataset)
-    print "int(len(train_dataset)/batch_size) ", int(len(train_dataset)/batch_size)
+    print("int(len(train_dataset)/batch_size) ", int(len(train_dataset)/batch_size))
     K.get_session().run(tf.global_variables_initializer())
 
-    model.fit(train_x, train_y,
-              batch_size=batch_size,
-              epochs=epochs,
+    model.fit_generator(train,
+              samples_per_epoch=np.ceil(len(train_dataset)/batch_size),	     
+# batch_size=batch_size,
+              epochs=num_epochs,
               verbose=1,
-              validation_data=(x_test, y_test),
+              validation_data=valid,
+	      validation_steps=batch_size,
               callbacks=model_callbacks)
 
-    score = model.evaluate(x_test, y_test, verbose=0)
+    score = model.evaluate(test, verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
 
