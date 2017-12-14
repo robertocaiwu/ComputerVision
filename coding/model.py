@@ -73,12 +73,13 @@ num_classes = 10
 image_size =32, 32, 1
 print image_size
 batch_size = 150
-num_epochs = 30
+num_epochs = 50
 train = (gen(train_dataset, train_labels, batch_size))
+print "training generator being called"
 # print (next(train)[0][0].shape)
 # print next(train)
 valid = (gen(valid_dataset, valid_labels, batch_size))
-
+print "training generator being called"
 
 # # Model
 
@@ -124,7 +125,9 @@ def CNN(input_shape, num_of_classes):
 # In[ ]:
 
 
+print "network being called"
 model = CNN(image_size, num_classes)
+
 model.compile(optimizer='adam', loss='categorical_crossentropy',
                                         metrics=['accuracy'])
 print model.summary()
