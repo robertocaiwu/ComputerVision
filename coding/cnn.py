@@ -45,14 +45,14 @@ def gen(dataset, labels, batch_size):
         i+=1
         # Generate images based on batch size
         if i == batch_size:
-            yield np.array(images), np.array(digits)
+            yield (np.array(images), np.array(digits))
             images = []
             digits = []
-        # Generate remaining images
-        if i == len(dataset):
-            yield np.array(images), np.array(digits)
-            images, digits = [], []
             i = 0
+        # Generate remaining images also
+        if len(images) == 0:
+            continue
+        yield (np.array(images), np.array(digits))
 
 class AccuracyHistory(keras.callbacks.Callback):
     def on_train_begin(self, logs={}):
@@ -87,8 +87,8 @@ if __name__ == "__main__":
     image_size =32, 32, 1
     print(image_size)
 
-    batch_size = 150
-    num_epochs = 100
+    batch_size = 64
+    num_epochs = 200
     #print "traind ata ", train_dataset
     train = gen(train_dataset, train_labels, batch_size)
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     valid = gen(valid_dataset, valid_labels, batch_size)
     #test_x, test_y = (gen(test_dataset, test_labels, batch_size))
     #test = (gen(test_dataset, test_labels, batch_size))
-    
+
 
     print("training generator being called")
 
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     K.get_session().run(tf.global_variables_initializer())
 
     model.fit_generator(train,
-              samples_per_epoch=np.ceil(len(train_dataset)/batch_size),	     
+              samples_per_epoch=np.ceil(len(train_dataset)/batch_size),
 # batch_size=batch_size,
               epochs=num_epochs,
               verbose=1,
