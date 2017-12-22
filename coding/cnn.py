@@ -20,44 +20,43 @@ import matplotlib.pyplot as plt
 #  CNN structure
 def CNN(input_, num_classes):
     #print input_shape
+
     model = Sequential()
-    model.add(Conv2D(16, (3, 3), border_mode='same', input_shape=input_))
+    model.add(Conv2D(16, (5, 5), border_mode='same', input_shape=input_))
     model.add(BatchNormalization())
     model.add(Activation('relu'))
-    # model.add(Conv2D(16, (3, 3), border_mode='same'))
-    # model.add(BatchNormalization())
-    # model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Dropout(0.5))
+    model.add(MaxPooling2D(pool_size=(5,5), strides=(2, 2)))
 
-    # model.add(Conv2D(32, (3, 3), border_mode='same'))
-    # model.add(BatchNormalization())
-    # model.add(Activation('relu'))
-    model.add(Conv2D(32, (3, 3), border_mode='same'))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Dropout(0.5))
-
-    model.add(Conv2D(64, (3, 3), border_mode='same'))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Dropout(0.5))
-
-    # model.add(Conv2D(128, (7, 7), border_mode='same'))
-    # model.add(BatchNormalization())
-    # model.add(Activation('relu'))
-    # model.add(MaxPooling2D(pool_size=(2,2)))
     # model.add(Dropout(0.5))
+    model.add(Conv2D(32, (5, 5),  border_mode='same'))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(5,5), strides=(2, 2)))
+    model.add(Dropout(0.5))
 
+    model.add(Conv2D(64, (3, 3),  border_mode='same'))
+    model.add(BatchNormalization())
+    # model.add(Conv2D(64, (5, 5),  border_mode='same'))
+    # model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(5,5), strides=(2, 2)))
+    model.add(Dropout(0.5))
+
+    # model.add(Conv2D(96, (5, 5), border_mode='same'))
+    # model.add(BatchNormalization())
+    # model.add(Conv2D(96, (5, 5), border_mode='same'))
+    # model.add(BatchNormalization())
+    # model.add(Activation('relu'))
+    # model.add(MaxPooling2D(pool_size=(5,5), strides=(2, 2)))
+    # model.add(Dropout(0.5))
     model.add(Flatten())
 
     # Fully connected layer
-    model.add(Dense(512))
+    model.add(Dense(64))
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
+
     model.add(Dense(10))
     model.add(Activation('softmax'))
 
@@ -83,6 +82,58 @@ def gen(dataset, labels, batch_size):
         if len(images) == 0:
             continue
         yield (np.array(images), np.array(digits))
+
+def gender_CNN(input_shape,num_classes):
+    model = Sequential()
+
+    model.add(Convolution2D(16, 7, 7, border_mode='same',
+                            input_shape=input_shape))
+    model.add(PReLU())
+    model.add(BatchNormalization())
+    model.add(AveragePooling2D(pool_size=(5, 5),strides=(2, 2), border_mode='same'))
+    model.add(Dropout(.5))
+
+    model.add(Convolution2D(32, 5, 5, border_mode='same'))
+    model.add(PReLU())
+    model.add(BatchNormalization())
+    model.add(AveragePooling2D(pool_size=(5, 5),strides=(2, 2), border_mode='same'))
+    model.add(Dropout(.5))
+
+    model.add(Convolution2D(512, 13, 13, border_mode='same'))
+    model.add(PReLU())
+    model.add(BatchNormalization())
+    model.add(AveragePooling2D(pool_size=(5, 5),strides=(2, 2), border_mode='same'))
+    model.add(Dropout(.5))
+
+    # model.add(Conv2D(64, (5, 5),  border_mode='same'))
+    # model.add(BatchNormalization())
+    # # model.add(Conv2D(64, (5, 5),  border_mode='same'))
+    # # model.add(BatchNormalization())
+    # model.add(Activation('relu'))
+    # model.add(MaxPooling2D(pool_size=(3,3), strides=(2, 2)))
+    # model.add(Dropout(0.5))
+
+    # model.add(Conv2D(64, (3, 3),  border_mode='same'))
+    # model.add(BatchNormalization())
+    # # model.add(Conv2D(64, (5, 5),  border_mode='same'))
+    # # model.add(BatchNormalization())
+    # model.add(Activation('relu'))
+    # model.add(MaxPooling2D(pool_size=(3,3), strides=(2, 2)))
+    # model.add(Dropout(0.5))
+
+
+
+    model.add(Flatten())
+    # model.add(Dense(1028))
+    # model.add(PReLU())
+    # model.add(Dropout(0.5))
+    model.add(Dense(1028))
+    model.add(PReLU())
+    model.add(Dropout(0.5))
+    model.add(Dense(num_classes))
+    model.add(Activation('softmax'))
+
+    return model
 
 class AccuracyHistory(keras.callbacks.Callback):
     def on_train_begin(self, logs={}):
@@ -130,14 +181,13 @@ if __name__ == "__main__":
     #test = (gen(test_dataset, test_labels, batch_size))
 
 
-    print("training generator being called")
+    #print("training generator being called")
 
     print("network being called")
-    model = CNN(image_size, num_classes)
+    model = gender_CNN(image_size, num_classes)
 
-    model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.SGD(lr=0.01),
-              metrics=['accuracy'])
+    model.compile(optimizer='adam', loss='categorical_crossentropy',
+                                        metrics=['accuracy'])
 
     print(model.summary())
     csv_logger = CSVLogger('training.log')
