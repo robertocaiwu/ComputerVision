@@ -38,9 +38,10 @@ class Application:
 			video_source = 'data/video/87.webm'
 			video_capture = cv2.VideoCapture(video_source)
 		if video_capture.isOpened():
-			# print("Successfully opened a camera.")
+			print("Successfully opened a camera.")
 			video_capture.read()
-
+		else:
+			print("Not opened.")
 
 		maxValue = 255
 		contour_color = (100, 0, 0)
@@ -52,17 +53,19 @@ class Application:
 			if self.frame_counter == video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)-1:
 				self.frame_counter = 0
 				video_capture.set(cv2.cv.CV_CAP_PROP_POS_FRAMES, 0)
-
-		orig = frame.copy()
+		rgb=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+		orig = rgb.copy()
 		imgray = cv2.cvtColor(orig,cv2.COLOR_BGR2GRAY)
 		blurred = cv2.GaussianBlur(imgray, (7, 7), 0)
-		_, self.thresh = cv2.threshold(blurred,self.b_threshold,maxValue,cv2.THRESH_BINARY)
+		if not self.inv.get():
+			_, self.thresh = cv2.threshold(blurred,self.b_threshold,maxValue,cv2.THRESH_BINARY)
+		else:
+			_, self.thresh = cv2.threshold(blurred,self.b_threshold,maxValue,cv2.THRESH_BINARY_INV)
 		edged = cv2.Canny(self.thresh, self.edge_threshold1, self.edge_threshold2, self.edge_aperture)
 		median = cv2.medianBlur(self.thresh,7)
-		#RETR_EXTERNAL  RETR_TREE
+		#RETR_EXTERNAL  RETR_TREE RETR_CCOMP
 		im2 = median.copy()
 		contours, hierarchy = cv2.findContours(im2,cv2.cv.CV_RETR_EXTERNAL,cv2.cv.CV_CHAIN_APPROX_SIMPLE)
-		# im2, contours, hierarchy = cv2.findContours(median.copy(),cv2.cv.CV_RETR_EXTERNAL,cv2.cv.CV_CHAIN_APPROX_SIMPLE)
 
 		cv2.drawContours(im2, contours, -1, contour_color , contour_width)
 
@@ -82,18 +85,18 @@ class Application:
 				# print(im)
 				# y: y+h, x: x+w
 				crop = self.thresh[im[1]:im[3], im[0]:im[2]].copy()
-				resized_image = cv2.resize(crop, (self.crop_size, self.crop_size))
-				# self.cropped_numbers.append(resized_image)
-				# print(resized_image.shape)
-				digit_label_arg = np.argmax(self.digit_classifier.predict(
-					resized_image.reshape(1,self.crop_size,self.crop_size,1)))
-				# print(digit_label_arg)
-				self.draw_text(im, self.bbox, str(digit_label_arg), self.text_color,
-							   0, -10, 1, 1)
+				try:
+					resized_image = cv2.resize(crop, (self.crop_size, self.crop_size))
+					digit_label_arg = np.argmax(self.digit_classifier.predict(
+						resized_image.reshape(1,self.crop_size,self.crop_size,1)))
+					self.draw_text(im, self.bbox, str(digit_label_arg), self.text_color,
+								   0, -10, 1, 1)
+				except:
+					pass
 
 
 		if self.dropVar.get() == 'Original':
-			img = Image.fromarray(frame)
+			img = Image.fromarray(rgb)
 		elif self.dropVar.get() == 'Gray':
 			img = Image.fromarray(imgray)
 		elif self.dropVar.get() == 'Threshold':
@@ -116,9 +119,6 @@ class Application:
 		self.lmain.after(100, self.show_frame)
 
 	def gui(self):
-		# self.imageFrame = tk.Frame(self.master, width=600, height=500)
-		# self.imageFrame.grid(row=0, column=0, padx=10, pady=2)
-
 		self.master.bind('<Escape>', lambda e: self.master.quit())
 		self.lmain = tk.Label(self.master)
 		self.lmain.grid(row=0, rowspan=20, column=0)
@@ -141,6 +141,11 @@ class Application:
 						   command=self.set_threshold)
 		self.w1.set(170)
 		self.w1.grid(row=row, column=1)
+		row+=1
+		self.inv = tk.IntVar()
+		self.chk1 = tk.Checkbutton(self.master, text="Invert Binary",
+								   variable=self.inv)
+		self.chk1.grid(row=row, column=1)
 		row+=1
 		l_edge = tk.Label(self.master, text="Canny edge").grid(row=row, column=1)
 		row+=1
@@ -226,6 +231,49 @@ class Application:
 		cv2.putText(image_array, text, (x + x_offset, y + y_offset),
 					cv2.FONT_HERSHEY_SIMPLEX,
 					font_scale, color, thickness, cv2.CV_AA)
+
+	def cap(self):
+		if self.s == '0':
+			video_capture = cv2.VideoCapture(0)
+		elif self.s == '1':
+			video_capture = cv2.VideoCapture(1)
+		else:
+			video_source = 'data/video/87.webm'
+			video_capture = cv2.VideoCapture(video_source)
+		if video_capture.isOpened():
+			# print("Successfully opened a camera.")
+			video_capture.read()
+		# print ("CV_CAP_PROP_FORMAT: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_FORMAT)))
+		# print ("CV_CAP_PROP_MODE: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_MODE)))
+		# print ("CV_CAP_PROP_FPS: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_FPS)))
+		# print ("CV_CAP_PROP_CONTRAST: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_CONTRAST)))
+		# print ("CV_CAP_PROP_GAIN: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_GAIN)))
+		# print ("CV_CAP_PROP_FRAME_WIDTH: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH)))
+		# print ("CV_CAP_PROP_FRAME_HEIGHT: " + str(int(video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT))))
+		# print ("CV_CAP_PROP_POS_FRAMES: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_POS_FRAMES)))
+		# print ("CV_CAP_PROP_EXPOSURE: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_EXPOSURE)))
+
+
+		_, frame = video_capture.read()
+		rgb=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+
+		# if self.s == '2':
+		# 	self.frame_counter += 1
+		# 	if self.frame_counter == video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)-1:
+		# 		self.frame_counter = 0
+		# 		video_capture.set(cv2.cv.CV_CAP_PROP_POS_FRAMES, 0)
+
+
+		if self.dropVar.get() == 'Contours':
+			img = Image.fromarray(rgb)
+		elif self.dropVar.get() == 'Bbox':
+			img = Image.fromarray(frame)
+
+
+		imgtk = ImageTk.PhotoImage(image=img)
+		self.lmain.imgtk = imgtk
+		self.lmain.configure(image=imgtk)
+		self.lmain.after(100, self.cap)
 
 if __name__ == '__main__':
 	# while True:
