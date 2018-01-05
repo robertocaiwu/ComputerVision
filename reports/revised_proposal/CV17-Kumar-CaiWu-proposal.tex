@@ -61,6 +61,12 @@ Images from dataset will be preprocessed before feeding to the network. Later on
 
 This dataset we use for our project to train the convolution network and predict in real time. It was created by National Institute of Standards and Technology(NIST). It consists of 60,000 training examples; each digit has 6,000 images, and testing examples of 10,000 examples. Furthermore, this dataset is size-normalized and centered to a fixed-size image. This dataset is mostly used by people who are interested to learn about pattern recognition methods or machine learning by devoting minimum amount of time on pre-processing and formatting the images. Each image in dataset contains one digit, and all digits are handwritten. Sample images of data set is shown in figure.
 
+\begin{figure}[!h]
+	\begin{center}	
+		\includegraphics[scale = 0.5]{mnist-digits-small.png}
+		\caption{ \cite{Classifying MNIST Digits} Samples images of MNIST dataset }
+	\end{center}
+\end{figure}  
 
 \subsection{Limitations}
 	\begin{itemize}
@@ -69,15 +75,8 @@ This dataset we use for our project to train the convolution network and predict
 		\item Number should be distanced enough so that bounding boxes do not overlap with other number.
 	\end{itemize}
 
-\begin{figure}[!h]
-	\begin{center}	
-		\includegraphics[scale = 0.5]{mnist-digits-small.png}
-		\caption{ \cite{Classifying MNIST Digits} Samples images of MNIST dataset }
-	\end{center}
-\end{figure}  
-
 \subsection{Graphic user interface (GUI)}
-	We have designed a GUI to control the parameters for the binary threshold and the canny edge detector. The GUI can also show the images through different stages of the pre-processing steps. This is selected by a drop-down menu which contains the following options:
+	We have designed a GUI to control the parameters for the binary threshold and the canny edge detector. An example of the GIU can be seen in Figure \ref{fig:gui}. The GUI can also show the images through different stages of the pre-processing steps in box 1. This is selected by a drop-down menu in box 2, which contains the following options:
 	\begin{itemize}
 		\item Original: show the rgb image without any filter.
 		\item Gray: show the image converted to gray-scale.
@@ -87,12 +86,19 @@ This dataset we use for our project to train the convolution network and predict
 		\item Contours: image with extracted contours.
 		\item Bbox: shows original image with bounding boxes drawn around detected contours with the prediction.
 	\end{itemize}
+	Box 3 contains a sliding menu to control the threshold value and ranges from 0 to 255. Box 4 contains a checkbox to invert the threshold operation. Box 5 contains a checkbox to activate Canny edge detection for contour extraction. By default, the contours are extracted from the threshold image. If edge detection is activated, The sliders in box 6 can adjust the first and second thresholds for the hysteresis procedure , and the aperture size of the Sobel operator. Box 7 contains 3 buttons that perform the following:
+	\begin{itemize}
+		\item Plot: shows all the cropped images in a colormap plot one by one. Used initially to verify the input to the classifier.
+		\item Recognize: pressing the button activates a flag to start classification of numbers and output the prediction.
+		\item Save img: saves the current image being displayed.
+	\end{itemize}
+	
 	
 \begin{figure}[!h]
 	\begin{center}	
 	\begin{subfigure}{0.9\textwidth}
 	\centering
-	\includegraphics*[width=1 \textwidth]{tk_015.png}
+	\includegraphics*[width=1 \textwidth]{tk_0152.png}
 	\end{subfigure}
 		
 	\end{center}
@@ -177,30 +183,20 @@ Figure \ref{model} below shows block diagram that we used to train the
 model. 
 
 \begin{figure}[!h]
-	\centering
-	\includegraphics[scale = 0.25]{trained_model_diagram.png}
+	\begin{center}
+		\includegraphics[scale = 0.25]{trained_model_diagram.png}
+	\end{center}
 	
 	\caption{CNN Model used to train MNIST dataset} \label{model}
 \end{figure}
 \newpage
 \subsection{Post-Processing}
 
-The post-processing consists of handling the predicted number for each cropped image sent to the CNN classifier. Once we have the predicted number, we draw the predicted number over the corresponding bounding box. An example image is shown in Figure \ref{fig:pred}.
+The post-processing consists of handling the predicted number for each cropped image sent to the CNN classifier. Once we have the predicted number, we draw the predicted number over the corresponding bounding box. An example image is shown in Figures \ref{fig:live1}, \ref{fig:live2}, and \ref{fig:live3}.
 
-\begin{figure}[!h]
-\begin{center}
-\begin{subfigure}{0.47\textwidth}
-\centering
-\includegraphics*[width=0.95 \textwidth, height=4cm]{bbox_p2.png}
-\end{subfigure}
-\end{center}
-\caption{Image with number prediction.}
-\label{fig:pred}
-\end{figure}
-
-
+\newpage
 \subsection{Challenges}
-
+	Some of the challenges we faced are listed here:
 	\begin{itemize}
 		\item Different Lighting conditions
 		\item Shadows
@@ -208,12 +204,70 @@ The post-processing consists of handling the predicted number for each cropped i
 		\item Different perspective view
 		\item Occluded and blurred digits
 	\end{itemize}
+	
+	Figure \ref{fig:chal} shows an example of the challenges we faced when we test our system with numbers of different fonts, sizes, colors and textures. Some of the numbers where not recognized due to the color being too light to be distinguished from some areas of the background. Since the numbers were printed, cut, and placed on a surface, some of the numbers had shadows which had an effect in the prediction accuracy. Other predictions were misclassified due to a change in color gradient.
+	
+\begin{figure}[!h]
+\begin{center}
+\begin{subfigure}{0.47\textwidth}
+\centering
+\includegraphics*[width=0.95 \textwidth, height=4cm]{chalorig.png}
+\caption{Grayscale image}
+\end{subfigure}
+\begin{subfigure}{0.47\textwidth}
+\centering
+\includegraphics*[width=0.95 \textwidth, height=4cm]{chalthresh.png}
+\caption{Image after binary threshold.}
+\end{subfigure}
+
+\begin{subfigure}{0.47\textwidth}
+\centering
+\includegraphics*[width=0.95 \textwidth, height=4cm]{chaledge.png}
+\caption{Image with edge map.}
+\end{subfigure}
+\begin{subfigure}{0.47\textwidth}
+\centering
+\includegraphics*[width=0.95 \textwidth, height=4cm]{chalbbox.png}
+\caption{Image with predictions.}
+\end{subfigure}
+\end{center}
+\caption{Example of challenges we faced.}
+\label{fig:chal}
+\end{figure}
+
 
 \subsection{Results}
 
 After training on 60,000 samples images and testing on 10,000 images, we got accuracy of 99.13\%. \\
 Furthermore, we also tested on real time, and classification results are satisfy.
-(attach figure of classification using real time here)
+
+\begin{figure}[!h]
+	\begin{center}
+		\centering
+		\includegraphics[width=0.75 \textwidth]{bbox_p11.png}
+		\caption{Image with number prediction from laptop camera.}
+		\label{fig:live1}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+	\begin{center}
+		\centering
+		\includegraphics[width=0.75 \textwidth]{bbox_p2.png}
+		\caption{Image with number prediction from cellphone camera.}
+		\label{fig:live2}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+	\begin{center}
+		\centering
+		\includegraphics[width=0.75 \textwidth]{bbox_p3.png}
+		\caption{Image with number prediction from different perspective using cellphone camera.}
+		\label{fig:live3}
+	\end{center}
+\end{figure}
+
 
 %\section{Contribution}
 
@@ -228,6 +282,7 @@ Furthermore, we also tested on real time, and classification results are satisfy
 %	\item Documentation(pair)
 %\end{itemize}
 \newpage
+
 \begin{thebibliography}{9}
 \bibitem{Convolutional Neural Networks Applied to House Numbers Digit Classification}
 Pierre Sermanet, Soumith Chintala and Yann LeCun, "Convolutional Neural Networks Applied to
