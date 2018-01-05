@@ -1,41 +1,42 @@
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: RnD.aux
+The top-level auxiliary file: CV17-Kumar-CaiWu.aux
 The style file: unsrt.bst
 Database file #1: presentation.bib.bib
 A bad cross reference---entry "cnn"
 refers to entry "conf/icpr/2012", which doesn't exist
+Warning--empty journal in mnist
 Warning--can't use both volume and number fields in netzer2011reading
-You've used 4 entries,
+You've used 5 entries,
             1791 wiz_defined-function locations,
-            472 strings with 4322 characters,
-and the built_in function-call counts, 1091 in all, are:
-= -- 91
-> -- 52
+            477 strings with 4455 characters,
+and the built_in function-call counts, 1237 in all, are:
+= -- 102
+> -- 60
 < -- 3
-+ -- 19
-- -- 15
-* -- 68
-:= -- 166
-add.period$ -- 13
-call.type$ -- 4
-change.case$ -- 3
++ -- 22
+- -- 17
+* -- 73
+:= -- 192
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 4
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 52
-empty$ -- 107
-format.name$ -- 15
-if$ -- 254
+cite$ -- 7
+duplicate$ -- 60
+empty$ -- 121
+format.name$ -- 17
+if$ -- 285
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 3
-newline$ -- 23
-num.names$ -- 4
-pop$ -- 18
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 28
+num.names$ -- 5
+pop$ -- 23
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 31
+skip$ -- 35
 stack$ -- 0
 substring$ -- 54
 swap$ -- 22
@@ -43,8 +44,8 @@ text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 9
-width$ -- 5
-write$ -- 46
+warning$ -- 2
+while$ -- 10
+width$ -- 6
+write$ -- 55
 (There was 1 error message)
