@@ -10,7 +10,6 @@ from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
 from keras.models import load_model
 
-# from gi.repository import GObject, Gst, Gtk, Gdk
 
 class Application:
 	def __init__(self, s='0'):
@@ -22,8 +21,7 @@ class Application:
 		self.frame_counter = 0
 		self.master = tk.Tk()
 		self.gui()
-		self.digit_classifier = load_model('./model/my_model.hdf5')
-		# self.digit_classifier = load_model('./model/Model5ep.hdf5')
+		self.digit_classifier = load_model('./model/TrainedModelMnist.hdf5')
 		self.crop_size = 28
 		self.text_color = (255, 0, 0)
 		self.recognize = 0
@@ -35,7 +33,7 @@ class Application:
 		elif self.s == '1':
 			video_capture = cv2.VideoCapture(1)
 		else:
-			video_source = 'data/video/87.webm'
+			video_source = 'data/video/video_numbers.mp4'
 			video_capture = cv2.VideoCapture(video_source)
 		if video_capture.isOpened():
 			print("Successfully opened a camera.")
@@ -61,11 +59,17 @@ class Application:
 			_, self.thresh = cv2.threshold(blurred,self.b_threshold,maxValue,cv2.THRESH_BINARY)
 		else:
 			_, self.thresh = cv2.threshold(blurred,self.b_threshold,maxValue,cv2.THRESH_BINARY_INV)
+
+
 		edged = cv2.Canny(self.thresh, self.edge_threshold1, self.edge_threshold2, self.edge_aperture)
 		median = cv2.medianBlur(self.thresh,7)
-		#RETR_EXTERNAL  RETR_TREE RETR_CCOMP
+
 		im2 = median.copy()
-		contours, hierarchy = cv2.findContours(im2,cv2.cv.CV_RETR_EXTERNAL,cv2.cv.CV_CHAIN_APPROX_SIMPLE)
+
+		if self.canny.get():
+			contours, hierarchy = cv2.findContours(edged,cv2.cv.CV_RETR_EXTERNAL,cv2.cv.CV_CHAIN_APPROX_SIMPLE)
+		else:
+			contours, hierarchy = cv2.findContours(im2,cv2.cv.CV_RETR_EXTERNAL,cv2.cv.CV_CHAIN_APPROX_SIMPLE)
 
 		cv2.drawContours(im2, contours, -1, contour_color , contour_width)
 
@@ -147,11 +151,14 @@ class Application:
 								   variable=self.inv)
 		self.chk1.grid(row=row, column=1)
 		row+=1
-		l_edge = tk.Label(self.master, text="Canny edge").grid(row=row, column=1)
+		self.canny = tk.IntVar()
+		self.chk2 = tk.Checkbutton(self.master, text="Canny edge",
+								   variable=self.canny)
 		row+=1
 		self.w2 = tk.Scale(self.master, from_=0, to=100,tickinterval=50,
 						   orient='horizontal', length=200,
 						   command=self.set_threshold)
+		self.chk2.grid(row=row, column=1)
 		self.w2.set(100)
 		self.w2.grid(row=row, column=1)
 		row+=1
@@ -202,24 +209,6 @@ class Application:
 			self.recognize = 0
 		else:
 			self.recognize = 1
-		# self.cropped_numbers = []
-		# for im in self.bbox_list:
-		# 	# print(im)
-		# 	# y: y+h, x: x+w
-		# 	crop = self.thresh[im[1]:im[3], im[0]:im[2]].copy()
-		# 	resized_image = cv2.resize(crop, (self.crop_size, self.crop_size))
-		# 	self.cropped_numbers.append(resized_image)
-		# 	# print(resized_image.shape)
-		# 	digit_label_arg = np.argmax(self.digit_classifier.predict(
-		# 		resized_image.reshape(1,self.crop_size,self.crop_size,1)))
-		# 	print(digit_label_arg)
-		#
-		# 	cv2.putText(self.bbox, text, (x + x_offset, y + y_offset),
-		# 				cv2.FONT_HERSHEY_SIMPLEX,
-		# 				font_scale, color, thickness, cv2.CV_AA)
-
-			# self.draw_text(im, self.bbox, str(digit_label_arg), self.text_color,
-			# 			   0, 0, 2, 2)
 
 	def draw_bounding_box(self, face_coordinates, image_array, color):
 		x, y, w, h = face_coordinates
@@ -232,48 +221,6 @@ class Application:
 					cv2.FONT_HERSHEY_SIMPLEX,
 					font_scale, color, thickness, cv2.CV_AA)
 
-	def cap(self):
-		if self.s == '0':
-			video_capture = cv2.VideoCapture(0)
-		elif self.s == '1':
-			video_capture = cv2.VideoCapture(1)
-		else:
-			video_source = 'data/video/87.webm'
-			video_capture = cv2.VideoCapture(video_source)
-		if video_capture.isOpened():
-			# print("Successfully opened a camera.")
-			video_capture.read()
-		# print ("CV_CAP_PROP_FORMAT: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_FORMAT)))
-		# print ("CV_CAP_PROP_MODE: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_MODE)))
-		# print ("CV_CAP_PROP_FPS: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_FPS)))
-		# print ("CV_CAP_PROP_CONTRAST: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_CONTRAST)))
-		# print ("CV_CAP_PROP_GAIN: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_GAIN)))
-		# print ("CV_CAP_PROP_FRAME_WIDTH: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH)))
-		# print ("CV_CAP_PROP_FRAME_HEIGHT: " + str(int(video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT))))
-		# print ("CV_CAP_PROP_POS_FRAMES: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_POS_FRAMES)))
-		# print ("CV_CAP_PROP_EXPOSURE: " + str(video_capture.get(cv2.cv.CV_CAP_PROP_EXPOSURE)))
-
-
-		_, frame = video_capture.read()
-		rgb=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-
-		# if self.s == '2':
-		# 	self.frame_counter += 1
-		# 	if self.frame_counter == video_capture.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)-1:
-		# 		self.frame_counter = 0
-		# 		video_capture.set(cv2.cv.CV_CAP_PROP_POS_FRAMES, 0)
-
-
-		if self.dropVar.get() == 'Contours':
-			img = Image.fromarray(rgb)
-		elif self.dropVar.get() == 'Bbox':
-			img = Image.fromarray(frame)
-
-
-		imgtk = ImageTk.PhotoImage(image=img)
-		self.lmain.imgtk = imgtk
-		self.lmain.configure(image=imgtk)
-		self.lmain.after(100, self.cap)
 
 if __name__ == '__main__':
 	# while True:
@@ -286,6 +233,5 @@ if __name__ == '__main__':
 		s = sys.argv[1]
 	print(sys.argv, len(sys.argv))
 	app = Application(s=s)
-	# app.master.after(1,app.cap())
 	app.master.after(10,app.show_frame())
 	app.master.mainloop()
