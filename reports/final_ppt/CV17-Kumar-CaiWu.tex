@@ -14,7 +14,7 @@
 \setbeamercolor{progress bar}{fg=brsu_blue}
 \setbeamercolor{normal text}{fg=black,bg=white}
 \setbeamercolor{frametitle}{bg=brsu_blue,fg=white}
-\usepackage{gensymb}
+%\usepackage{gensymb}
 
 \title{Read Digits from Natural Images using Convolutional Neural Network}
 
@@ -193,10 +193,11 @@
 \frametitle{Pre-processing from camera}
 
 \begin{itemize}
-	\item Resize image to 640x480 pixels
+	\item Resize image to 1080x720 pixels
 	\item Convert to gray scale
 	\item Apply Gaussian filter
 	\item Use a binary thresholding
+	\item Canny edge detection
 	\item Find contours
 	\item Draw bounding box around contours
 \end{itemize}
